@@ -21,8 +21,8 @@ public class ResultTest {
         Gson gson = new Gson();
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"placeholder\"}";
         Game g = gson.fromJson(jsonText, Game.class);
-        int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(totalscore, new int[] {20, 40, 58, 67, 84, 91, 98, 111,116, 123});
+        int[] totalScore = g.getPoints();
+        Assert.assertArrayEquals(totalScore, new int[] {20, 40, 58, 67, 84, 91, 98, 111,116, 123});
 
     }
 
@@ -44,8 +44,8 @@ public class ResultTest {
         Gson gson = new Gson();
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
         Game g = gson.fromJson(jsonText, Game.class);
-        int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(new int[] {30, 60, 90, 120, 150, 180, 210, 240, 270, 300}, totalscore);
+        int[] totalScore = g.getPoints();
+        Assert.assertArrayEquals(new int[] {30, 60, 90, 120, 150, 180, 210, 240, 270, 300}, totalScore);
     }
 
     @Test
@@ -64,8 +64,8 @@ public class ResultTest {
         Gson gson = new Gson();
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
         Game g = gson.fromJson(jsonText, Game.class);
-        int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(totalscore, new int[] {14, 19, 29, 32, 38, 41, 50, 56, 66});
+        int[] totalScore = g.getPoints();
+        Assert.assertArrayEquals(totalScore, new int[] {14, 19, 29, 32, 38, 41, 50, 56, 66});
     }
 
     @Test
@@ -78,8 +78,8 @@ public class ResultTest {
         Gson gson = new Gson();
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
         Game g = gson.fromJson(jsonText, Game.class);
-        int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(totalscore, new int[] {16, 22, 32});
+        int[] totalScore = g.getPoints();
+        Assert.assertArrayEquals(totalScore, new int[] {16, 22, 32});
     }
 
 }

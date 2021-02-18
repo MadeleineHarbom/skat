@@ -7,10 +7,7 @@ public class Game {
     private String token;
     private int[][] points;
 
-
-
     public int[] getPoints() {
-        Gson gson = new Gson();
         int size = this.points.length;
         size = size > 10 ? 10 : size;
         int[] summedArray = new int[size];
@@ -62,7 +59,6 @@ public class Game {
     public String asJson() {
         Gson gson = new Gson();
         int[] points = this.getPoints();
-        String jsonText = "{\"points\":" + gson.toJson(points) + ", \"token\": \"" + this.token + "\"}";
-        return jsonText;
+        return "{\"points\":" + gson.toJson(points) + ", \"token\": \"" + this.token + "\"}";
     }
 }

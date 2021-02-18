@@ -8,7 +8,7 @@ public class LiveTest {
 
     @Test
     public void liveTest() {
-        int failcount = 0;
+        int failCount = 0;
         try {
             final String urlString = "http://13.74.31.101/api/points";
             final URL url = new URL(urlString);
@@ -16,15 +16,13 @@ public class LiveTest {
             for(int i = 0; i <20; i++) {
                 Game game = bowlingAPI.getGame();
                 if (!(bowlingAPI.validateGame(game))) {
-                    failcount ++;
+                    failCount ++;
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
-            failcount ++;
+            failCount ++;
         }
-        Assert.assertEquals(0, failcount);
+        Assert.assertEquals(0, failCount);
     }
 }
