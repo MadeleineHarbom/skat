@@ -7,7 +7,6 @@ public class ResultTest {
 
     @Test
     public void TestTotalScore1() {
-        String token = "placeholder";
         int[][] scores= {
                 {3,7},
                 {10,0},
@@ -26,7 +25,6 @@ public class ResultTest {
         Assert.assertArrayEquals(totalscore, new int[] {20, 40, 58, 67, 84, 91, 98, 111,116, 123});
 
     }
-
 
     @Test
     public void TestTotalScore2() {
@@ -47,7 +45,7 @@ public class ResultTest {
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
         Game g = gson.fromJson(jsonText, Game.class);
         int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(totalscore, new int[] {30, 60, 90, 120, 150, 180, 210, 240, 270, 300});
+        Assert.assertArrayEquals(new int[] {30, 60, 90, 120, 150, 180, 210, 240, 270, 300}, totalscore);
     }
 
     @Test
@@ -67,8 +65,21 @@ public class ResultTest {
         String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
         Game g = gson.fromJson(jsonText, Game.class);
         int[] totalscore = g.getPoints();
-        Assert.assertArrayEquals(totalscore, new int[] {14, 19, 39, 45, 48, 57, 210, 240, 270, 300});
+        Assert.assertArrayEquals(totalscore, new int[] {14, 19, 29, 32, 38, 41, 50, 56, 66});
     }
 
+    @Test
+    public void TestTotalScore4() {
+        String token = "JciV4Ka1QertRlw7GjuhSJIZ8hkPSNm9";
+        int[][] scores= {
+                {7,3},
+                {6,0},
+                {9,1}};
+        Gson gson = new Gson();
+        String jsonText = "{\"points\":" + gson.toJson(scores) + ", \"token\": \"" + token+ "\"}";
+        Game g = gson.fromJson(jsonText, Game.class);
+        int[] totalscore = g.getPoints();
+        Assert.assertArrayEquals(totalscore, new int[] {16, 22, 32});
+    }
 
 }
