@@ -10,27 +10,17 @@ public class Game {
 
 
     public int[] getPoints() {
-        //TODO delete me
-        System.out.println("Get points");
         Gson gson = new Gson();
-        System.out.println(this.token);
-        System.out.println(gson.toJson(this.points));
-        int[] last =  this.points[this.points.length-1];
-        int size;
-        if (last[0] == 10 || last[1]== 10) {
-            size = this.points.length-1;
-        } else {
-            size = this.points.length;
-            size = size <= 10 ? size : 10;
-
-        }
+        int size = this.points.length;
+        size = size > 10 ? 10 : size;
         int[] summedArray = new int[size];
+
         for (int i = 0; i < size; i++) {
             int[] s = this.points[i];
             if(s[0] == 10) {
                 summedArray[i] = sumStrike(i);
             } else if (s[0]+s[1] == 10) {
-                summedArray[i] = 10 + this.points[i+1][0];
+                summedArray[i] = sumSpare(i);
 
             }
             else {
@@ -46,17 +36,27 @@ public class Game {
     }
 
     private int sumStrike(int i) {
-        int strikeScore = 0;
-        if(this.points[i+1][0] == 10) {
-            try {
-                strikeScore = 10 + this.points[i+1][0] +this.points[i+2][0];
-            } catch (IndexOutOfBoundsException e) {
-                strikeScore = 10 + this.points[i+1][0] + this.points[i+1][1];
+        if(i < this.points.length-1) {
+            if(this.points[i+1][0] == 10) {
+                if (i < this.points.length-2) {
+                    return 20 + this.points[i+2][0];
+                } else {
+                    return 20 + this.points[i+1][1];
+                }
+            } else {
+                return 10 + this.points[i+1][0] + this.points[i+1][1];
             }
         } else {
-            strikeScore = 10 + points[i+1][0] + points[i+1][1];
+            return 10;
         }
-        return strikeScore;
+    }
+
+    private int sumSpare(int i) {
+        if(i < this.points.length-1) {
+            return 10 + this.points[i+1][0];
+        } else {
+            return 10;
+        }
     }
 
     public String asJson() {

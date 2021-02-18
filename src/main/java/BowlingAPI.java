@@ -1,6 +1,5 @@
 
 import com.google.gson.Gson;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -30,19 +29,27 @@ public class BowlingAPI {
         }
 
         try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            if (con.getResponseCode() != 200) {
+                return false;
+            }
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
             }
-            System.out.println(game.asJson());
-            System.out.println(response.toString());
+
+            Gson gson = new Gson();
+            Result result = gson.fromJson(response.toString(), Result.class);
+            return result.success;
+
+
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return false; //TODO FX ME
     }
 
     public HttpURLConnection getPostConnection(URL url) throws IOException {
@@ -61,12 +68,11 @@ public class BowlingAPI {
             BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder sb = new StringBuilder();
             int cp;
-            while ((cp = rd.read()) != -1) { // TODO > = ?
+            while ((cp = rd.read()) != -1) {
                 sb.append((char) cp);
             }
             String jsonText = sb.toString();
-            System.out.println("input");
-            System.out.println(jsonText);
+
 
             Gson gson = new Gson();
             Game game = gson.fromJson(jsonText, Game.class);
@@ -78,5 +84,10 @@ public class BowlingAPI {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private class Result {
+        boolean success;
+        int[] input;
     }
 }
